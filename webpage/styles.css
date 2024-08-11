@@ -119,6 +119,38 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: rgba(168, 168, 168, 0.2);
 }
 
+#mount {
+    border: none;
+    outline: none;
+    color: white;
+    background-color: rgba(168, 168, 168, 0.1);
+    height: 30px;
+    width: auto;
+    font-size: 2.5vmin;
+}
+
+#mountSubmit {
+    background-color: rgba(168, 168, 168, 0.1);
+    font-size: 2.5vmin;
+}
+
+#mountSubmit:hover {
+    background-color: rgba(168, 168, 168, 0.2);
+}
+
+#mount:hover {
+    background-color: rgba(168, 168, 168, 0.2);
+}
+
+select option {
+    background: rgb(32, 32, 32);
+}
+
+/* select.decorated option:hover {
+    box-shadow: 0 0 10px 100px rgb(10,10,10) inset;
+}
+ */
+ 
 @media screen and (max-width: 768px) {
     body {
         background-image: url("static/bckg_mob.jpg");
