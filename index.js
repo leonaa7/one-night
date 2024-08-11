@@ -24,7 +24,7 @@ form.addEventListener('submit', function(event) {
     event.preventDefault();
     const aladinMap = document.getElementById("aladin-lite-div");
     const datetime = document.getElementById('datetime').value;
-    const ra = parseFloat(document.getElementById('ra').value);
+    const ra = Math.sqrt(parseFloat(document.getElementById('side-a').value)**2 + parseFloat(document.getElementById("side-b")**2))/2;
     const dec = parseFloat(document.getElementById('dec').value);
     const radius = parseFloat(document.getElementById('radius').value);
 

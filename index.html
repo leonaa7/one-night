@@ -30,8 +30,12 @@
                 <input type="number" id="dec" name="dec" step="any" value="4" required>
             </div>
             <div class="select">
-                <label style="padding-top: 4px; padding-bottom: 4px; padding-right: 10px; padding-left: 5px;" for="radius">Radius (degrees): </label>
-                <input type="number" id="radius" name="radius" step="any" value="1" required>
+                <label style="padding-top: 4px; padding-bottom: 4px; padding-right: 10px; padding-left: 5px;" for="radius">Side a: </label>
+                <input type="number" id="side-a" name="side-a" step="any" value="1" required>
+            </div>   
+            <div class="select">
+                <label style="padding-top: 4px; padding-bottom: 4px; padding-right: 10px; padding-left: 5px;" for="radius">Side b: </label>
+                <input type="number" id="side-b" name="side-b" step="any" value="1" required>
             </div>   
         </div>
         <button type="submit" value="Submit" style="border: none; outline: none; color: white; font-size: 24px; margin-top: 20px" id="input" onclick="toggleTableVisibility()">Fetch Ephemerides</button>
