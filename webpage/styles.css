@@ -1,0 +1,127 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 3vmin;
+    background-image: url("static/bckg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: black;
+    color: white;
+} 
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.select {
+    background-color: rgba(168, 168, 168, 0.1);
+    margin: 1vw;
+}
+
+.select:hover {
+    background-color: rgba(168, 168, 168, 0.2);
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.output-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 5vw;
+}
+
+.form-row input {
+    border: none;
+    outline: none;
+    width: 10vw;
+    font-size: 3vmin;
+    background-color: transparent;
+    color: white;
+}
+
+.form-row label {
+    margin-right: 0px;
+    margin-left: 0%;
+    font-size: 3vmin;
+    background-color: transparent;
+}
+
+.form-row label:last-of-type, .form-row input:last-of-type {
+    margin-right: 10px;
+}
+
+.table-container {
+    font-size: 2.5vmin;
+    height: 72vmin;
+    margin: 2vmin;
+    overflow-y: scroll;
+    background-color: rgba(53, 59, 59, 0.6);
+}
+
+hr {
+    width: 100%;
+    margin: 20px 0;
+}
+
+input[type=number] { 
+    -moz-appearance: textfield;
+    appearance: textfield;
+    margin: 0; 
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+#downloadCsv {
+    margin-top: 10px;
+    background-color: rgba(168, 168, 168, 0.1);
+}
+
+#downloadCsv:hover {
+    background-color: rgba(168, 168, 168, 0.2);
+}
+
+#runtime {
+    margin-top: 20px;
+    font-size: small;
+}
+
+#input {
+    background-color: rgba(168, 168, 168, 0.1);
+}
+
+#input:hover {
+    background-color: rgba(168, 168, 168, 0.2);
+}
+
+#convertUnitsButton {
+    background-color: rgba(168, 168, 168, 0.1);
+}
+
+#convertUnitsButton:hover {
+    background-color: rgba(168, 168, 168, 0.2);
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        background-image: url("static/bckg_mob.jpg");
+        background-size: cover;
+    }
+}
