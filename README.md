@@ -1,7 +1,3 @@
 # one-night
 
-Hello World
-
-New test
-
-one more
+#The process of getting data for the day
