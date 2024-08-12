@@ -5,16 +5,18 @@ const downloadButton = document.getElementById('downloadCsv');
 const toggleFormatButton = document.getElementById('convertUnitsButton');
 const runtimeDisplay = document.getElementById('runtime');
 
+
+
 let useSexagesimal = false;
 let originalData = [];
 
 function toLocalISOString(date) {
-    const localDate = new Date(date); //offset in milliseconds. Credit https://stackoverflow.com/questions/10830357/javascript-toisostring-ignores-timezone-offset
+    const UTCDate = new Date(date); //offset in milliseconds. Credit https://stackoverflow.com/questions/10830357/javascript-toisostring-ignores-timezone-offset
 
     // Optionally remove second/millisecond if needed
 
-    localDate.setMilliseconds(null);
-    return localDate.toISOString().slice(0, -1);
+    UTCDate.setMilliseconds(null);
+    return UTCDate.toISOString().slice(0, -1);
 }
     window.addEventListener("load", () => {
     document.getElementById("datetime").value = toLocalISOString(new Date());
@@ -255,22 +257,63 @@ radiusInput.addEventListener('input', function() {
     }
 });
 
-// function getOption() {
-//     var inputs = document.getElementById("latLong")
-//     selectElement = 
-//           document.querySelector('#mount');
-//     output = selectElement.value;
-//     console.log(output);
-//     // document.querySelector('.output').textContent = output;
-//     if (output === "Altaz") {
-//         latLong.style.display = "flex";
-//     }
-//     if (output === "Equatorial") {
-//         latLong.style.display = "none";
-//     }
-// }
+function getOption() {
+    var latLong = document.getElementById("latLong")
+    selectElement = document.querySelector('#mount');
+    output = selectElement.value;
+    console.log(output);
+    // document.querySelector('.output').textContent = output;
+    if (output === "Altaz") {
+        latLong.style.display = "flex";
+    }
+    if (output === "Equatorial") {
+        latLong.style.display = "none";
+    }
+};
 
-// function rotationCalculations() {
-//     var HA = new Date() - Date().getTimezoneOffset() * 60000;
-//     console.log(HA);
+function rotationCalculations(date) {
+    const ra = parseFloat((document.getElementById("ra").value)/360*2*Math.PI);
+    const dec = parseFloat((document.getElementById("dec").value)/360*2*Math.PI);
+    const long = parseFloat((document.getElementById("long").value)/360*2*Math.PI);
+    const lat = parseFloat((document.getElementById("lat").value)/360*2*Math.PI);
+
+
+    var date = new Date().getUTCHours();
+    var hours = new Date(document.getElementById('datetime').value).getHours();
+    var minutes = new Date(document.getElementById('datetime').value).getMinutes();
+    var seconds = new Date(document.getElementById('datetime').value).getSeconds();
+    var degreeTime = parseFloat((hours + minutes/60 + seconds/3600)*2*Math.PI);
+    var HA = parseFloat(degreeTime + long - ra);
+
+    console.log(degreeTime, HA);
+
+    var t1 = Math.round(HA);
+    var t2 = (hours+minutes/60)*(15/360)*2*Math.PI;
+
+    var rotation = 0;
+    var speed = 0;
+
+    if (t1>t2) {
+        for(let i = 0; i >= (t2-t1)*100; i--) {
+            var integratedDegreeTime = parseFloat((hours + minutes/60 + seconds/3600)*2*Math.PI+i/100);
+            var HAiDT = parseFloat(integratedDegreeTime + long - ra);
+
+            var alt = parseFloat(Math.asin(Math.sin(lat)*Math.sin(dec)+Math.cos(lat)*Math.cos(dec)*Math.cos(HAiDT)));
+            var az = parseFloat(Math.acos((Math.sin(dec)))-(Math.sin(alt)*Math.sin(lat)))/(Math.cos(alt)*Math.cos(lat));
+        
+            speed = (15.0416 * (Math.cos(az))/Math.cos(alt));
+            rotation += speed*(i/100);
+            if (i % 5 === 0) {
+                console.log(i, "Ha", HA, "iDT", integratedDegreeTime, "HAiDT", HAiDT, "alt-az", alt, az, "speed", speed, "rotation", rotation);
+            }
+        }
+    }
+    
+};
+
+// function localDate(date) {
+//     var date = new Date();
+//     var local = date.getTime() + (date.getTimezoneOffset()*60000)
+
+//     console.log(local, date);
 // };
