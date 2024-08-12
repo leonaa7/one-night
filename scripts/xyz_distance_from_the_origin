@@ -1,0 +1,75 @@
+```
+import numpy as np
+
+def kepler(M, e, tol=1e-6):
+    """
+    Solve Kepler's equation for Eccentric Anomaly E given the Mean Anomaly M and eccentricity e.
+    """
+    M = np.deg2rad(M)  # Convert M to radians
+    E = M  # Initial guess for Eccentric Anomaly
+    while True:
+        E_next = E - (E - e * np.sin(E) - M) / (1 - e * np.cos(E))
+        if np.abs(E_next - E) < tol:
+            break
+        E = E_next
+    return E
+
+def orbital_to_cartesian(a, e, M, Omega, omega):
+    """
+    Convert orbital elements to Cartesian coordinates.
+    """
+    # Convert degrees to radians
+    Omega = np.deg2rad(Omega)
+    omega = np.deg2rad(omega)
+    M = np.deg2rad(M)
+
+    # Solve Kepler's equation to find the Eccentric Anomaly
+    E = kepler(M, e)
+    
+    # Compute the true anomaly
+    true_anomaly = 2 * np.arctan2(np.sqrt(1 + e) * np.sin(E / 2), np.sqrt(1 - e) * np.cos(E / 2))
+    
+    # Compute the heliocentric distance
+    r = a * (1 - e * np.cos(E))
+    
+    # Compute the position in the orbital plane
+    x_orbital = r * np.cos(true_anomaly)
+    y_orbital = r * np.sin(true_anomaly)
+    
+    # Compute the velocity in the orbital plane
+    v_x_orbital = -np.sqrt(1 / (a * (1 - e**2))) * np.sin(E)
+    v_y_orbital = np.sqrt(1 / (a * (1 - e**2))) * (np.sqrt(1 - e**2) * np.cos(E) - e)
+    
+    # Transform to the heliocentric frame
+    x = (np.cos(Omega) * np.cos(omega) - np.sin(Omega) * np.sin(omega) * np.cos(true_anomaly)) * x_orbital - \
+        (np.sin(Omega) * np.cos(omega) + np.cos(Omega) * np.sin(omega) * np.cos(true_anomaly)) * y_orbital
+    
+    y = (np.cos(Omega) * np.sin(omega) + np.sin(Omega) * np.cos(omega) * np.cos(true_anomaly)) * x_orbital + \
+        (np.sin(Omega) * np.sin(omega) - np.cos(Omega) * np.cos(omega) * np.cos(true_anomaly)) * y_orbital
+    
+    z = np.sin(Omega) * np.sin(true_anomaly) * x_orbital + np.cos(Omega) * np.sin(true_anomaly) * y_orbital
+
+    return x, y, z
+
+def calculate_distance(x, y, z):
+    """
+    Calculate the distance from the origin to the point (x, y, z).
+    """
+    return np.sqrt(x**2 + y**2 + z**2)
+
+# Orbital elements
+a = 1.5237  # Semi-major axis in AU
+e = 0.0934   # Eccentricity
+M = 19.373  # Mean anomaly in degrees
+Omega = 49.558  # Longitude of the Ascending Node in degrees
+omega = 336.040   # Argument of Perihelion in degrees
+
+# Calculate the Cartesian coordinates
+x, y, z = orbital_to_cartesian(a, e, M, Omega, omega)
+
+# Calculate the distance
+d = calculate_distance(x, y, z)
+
+print(f"Cartesian Coordinates (AU): x = {x:.6f}, y = {y:.6f}, z = {z:.6f}")
+print(f"Distance from the origin (AU): d = {d:.6f}")
+```
