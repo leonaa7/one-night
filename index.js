@@ -281,7 +281,7 @@ function rotationCalculations(date) {
     var date = new Date().getUTCHours();
     var hours = new Date(document.getElementById('datetime').value).getHours();
     var minutes = new Date(document.getElementById('datetime').value).getMinutes();
-    var seconds = new Date(document.getElementById('datetime').value).getSeconds();
+    var seconds = new Date(document.getElementById('datetime').value).getSeconds();fi
     var degreeTime = parseFloat((hours + minutes/60 + seconds/3600)*2*Math.PI);
     var HA = parseFloat(degreeTime + long - ra);
 
