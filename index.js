@@ -24,9 +24,10 @@ form.addEventListener('submit', function(event) {
     event.preventDefault();
     const aladinMap = document.getElementById("aladin-lite-div");
     const datetime = document.getElementById('datetime').value;
-    const ra = Math.sqrt(parseFloat(document.getElementById('side-a').value)**2 + parseFloat(document.getElementById("side-b")**2))/2;
+    const ra = parseFloat(document.getElementById("ra").value);
     const dec = parseFloat(document.getElementById('dec').value);
-    const radius = parseFloat(document.getElementById('radius').value);
+    const radius = parseFloat(document.getElementById("radius").value);
+    // const radius = Math.sqrt(parseFloat(document.getElementById('side-a').value)**2 + parseFloat(document.getElementById("side-b")**2))/2;
 
     const mjd = calculateMJD(datetime);
 
@@ -254,3 +255,22 @@ radiusInput.addEventListener('input', function() {
     }
 });
 
+// function getOption() {
+//     var inputs = document.getElementById("latLong")
+//     selectElement = 
+//           document.querySelector('#mount');
+//     output = selectElement.value;
+//     console.log(output);
+//     // document.querySelector('.output').textContent = output;
+//     if (output === "Altaz") {
+//         latLong.style.display = "flex";
+//     }
+//     if (output === "Equatorial") {
+//         latLong.style.display = "none";
+//     }
+// }
+
+// function rotationCalculations() {
+//     var HA = new Date() - Date().getTimezoneOffset() * 60000;
+//     console.log(HA);
+// };

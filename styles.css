@@ -11,7 +11,7 @@ body {
     background-color: black;
     color: white;
 } 
-/* commeent test */
+
 form {
     display: flex;
     flex-direction: column;
@@ -90,7 +90,7 @@ input[type=number]::-webkit-outer-spin-button {
     font-size: small;
 }
 #input {
-    background-color: rgb(255, 0, 0);
+    background-color: rgba(168, 168, 168, 0.1);
 }
 #input:hover {
     background-color: rgba(168, 168, 168, 0.2);
@@ -101,6 +101,28 @@ input[type=number]::-webkit-outer-spin-button {
 #convertUnitsButton:hover {
     background-color: rgba(168, 168, 168, 0.2);
 }
+#mount {
+    border: none;
+    outline: none;
+    color: white;
+    background-color: transparent;
+    padding: 4px;
+    font-size: 2.3vmin;
+}
+
+/* #mountSubmit {
+    background-color: rgba(168, 168, 168, 0.1);
+    font-size: 2.5vmin;
+}
+
+#mount:hover {
+    background-color: rgba(168, 168, 168, 0.2);
+} */
+
+select option {  
+    background: rgb(32, 32, 32);
+}
+
 @media screen and (max-width: 768px) {
     body {
         background-image: url("static/bckg_mob.jpg");
